@@ -1,0 +1,7 @@
+<div class="addresspicker-widget" id="addresspicker-widget-{{ id }}">
+    <div class="addresspicker-search-block">поиск по карте: <input type="search" class="addresspicker-search"></div>
+    <div class="addresspicker-map"></div>
+    <div class="addresspicker-result-block">координаты: <input class="addresspicker-result" {{ final_attrs|safe }}></div>
+    <input type="hidden" class="addresspicker-initial-lat" value="{{ latlng.0 }}">
+    <input type="hidden" class="addresspicker-initial-lng" value="{{ latlng.1 }}">
+</div>
