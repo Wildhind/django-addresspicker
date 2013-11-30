@@ -6,7 +6,7 @@ Simple Django app providing visual address picker widget using Google maps.
 
 Original jQuery plugin: https://github.com/sgruhier/jquery-addresspicker
 
-.. image:: screenshot.png
+.. image:: ./img/screenshot.png
 
 
 Installation
