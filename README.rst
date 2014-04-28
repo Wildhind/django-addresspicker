@@ -14,7 +14,7 @@ Installation
 1. Using pip:
 ::
 
-    pip install -e git+git://github.com/Wildhind/addresspicker.git#egg=addresspicker
+    pip install -e git+git://github.com/Wildhind/django-addresspicker.git#egg=addresspicker
 
 
 2. Add "addresspicker" to your INSTALLED_APPS setting like this::
