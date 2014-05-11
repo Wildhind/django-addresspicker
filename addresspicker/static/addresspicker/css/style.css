@@ -10,5 +10,8 @@
     margin: 8px 0;
 }
 .addresspicker-result {
+    width: 640px;
+}
+.addresspicker-coords {
     width: 320px;
 }

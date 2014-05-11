@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 from django.forms.util import flatatt
 from django.template.loader import render_to_string
 from django.utils.html import conditional_escape
+import json
 
 
 class AddressPickerWidget(widgets.TextInput):
@@ -25,6 +26,14 @@ class AddressPickerWidget(widgets.TextInput):
         )
 
     def render(self, name, value, attrs=None):
+        try:
+            value_object = json.loads(value)
+            latlng = value_object['latlng']
+            zoom = value_object['zoom']
+        except:
+            value_object = {}
+            latlng = 0
+            zoom = 5
         if value is None:
             value = ''
         final_attrs = self.build_attrs(attrs, type=self.input_type, name=name)
@@ -33,6 +42,7 @@ class AddressPickerWidget(widgets.TextInput):
         return mark_safe(render_to_string('addresspicker/map.html', {
             'final_attrs': flatatt(final_attrs),
             'value': conditional_escape(force_unicode(value)),
-            'latlng': conditional_escape(force_unicode(value)).split(','),
+            'latlng': conditional_escape(force_unicode(latlng)).split(','),
+            'zoom': conditional_escape(force_unicode(zoom)),
             'id': final_attrs['id']
         }))

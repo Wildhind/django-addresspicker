@@ -32,6 +32,8 @@
             lat: false,
             lng: false,
             latlng: false,
+            zoom: false,
+            result: false,
             street_number: false,
             route: false,
             locality: false,
@@ -116,6 +118,8 @@
       this.lat      = $(this.options.elements.lat);
       this.lng      = $(this.options.elements.lng);
       this.latlng      = $(this.options.elements.latlng);
+      this.zoom      = $(this.options.elements.zoom);
+      this.result      = $(this.options.elements.result);
       this.street_number = $(this.options.elements.street_number);
       this.route = $(this.options.elements.route);
       this.locality = $(this.options.elements.locality);
@@ -141,10 +145,12 @@
         map:this.gmap,
         draggable: this.options.draggableMarker});
       google.maps.event.addListener(this.gmarker, 'dragend', $.proxy(this._markerMoved, this));
+      google.maps.event.addListener(this.gmap, 'zoom_changed', $.proxy(this._markerMoved, this));
       this.gmarker.setVisible(false);
     },
 
     _updatePosition: function(location) {
+      var result = {};
       if (this.lat) {
         this.lat.val(location.lat());
       }
@@ -152,7 +158,17 @@
         this.lng.val(location.lng());
       }
       if (this.latlng) {
-        this.latlng.val(location.lat()+','+location.lng());
+        var latlng = location.lat()+','+location.lng();
+        this.latlng.val(latlng);
+        result.latlng = latlng;
+      }
+      if (this.zoom) {
+        var zoom = this.gmap.getZoom();
+        this.zoom.val(zoom);
+        result.zoom = zoom;
+      }
+      if (this.result) {
+        this.result.val(JSON.stringify(result));
       }
     },
 
